@@ -8,7 +8,7 @@
 <body>
 
 <?php
-	
+	ob_start();
 $ftp_server = "localhost";
 $ftp_user_name = "test";
 $ftp_user_pass = "";
@@ -57,6 +57,14 @@ echo "Uploaded $source_file to $ftp_server as $destination_file";
 }
 
 ftp_close($conn_id);
+	
+	$url = 'http://localhost/index.php'; 
+	while (ob_get_status()) 
+{
+    ob_end_clean();
+}
+	header( "Location: $url" );
+	
 ?>
 
 </body>
